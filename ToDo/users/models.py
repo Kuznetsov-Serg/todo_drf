@@ -22,6 +22,7 @@ def user_pre_save(sender, **kwargs):
 
     if not email:
         raise ValidationError("email required")
+
     if sender.objects.filter(email=email).exclude(username=username).count():
         raise ValidationError("email needs to be unique")
 
