@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
+import MainMenu from './components/MainMenu.js';
 import UserList from './components/User.js';
+import Footer from './components/Footer.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -44,7 +46,9 @@ class App extends React.Component {
     render () {
         return (
             <div>
+                <MainMenu />
                 <UserList users={this.state.users} />
+                <Footer />
             </div>
         )
     }
