@@ -9,6 +9,11 @@ from django.db import models
 
 class User(AbstractUser):
     # avatar = models.ImageField(upload_to='users_avatars', max_length=256, blank=True)
+    def __str__(self):
+        if self.first_name or self.last_name:
+            return f'{self.first_name} {self.last_name}'
+        return self.username
+
     class Meta(object):
         unique_together = ('email',)    # делает уникальным
         verbose_name = 'пользователь'
