@@ -138,11 +138,21 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Режим рендерирования в JSON
+# Для camelCase вместо snake_case в интерфейса API (https://github.com/vbabiy/djangorestframework-camel-case)
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
+        'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+        # Any other renders
         'rest_framework.renderers.JSONRenderer',
-        # 'rest_framework.renderers.BrowsableAPIRenderer'
-    ]
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        # If you use MultiPartFormParser or FormParser, we also have a camel case version
+        'djangorestframework_camel_case.parser.CamelCaseFormParser',
+        'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
+        'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+        # Any other parsers
+    ],
 }
 
 # в режиме отладки добавим интерфейс удобного API-редактирования
