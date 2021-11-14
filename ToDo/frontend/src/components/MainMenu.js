@@ -1,4 +1,5 @@
 //import React from 'react';
+import {Link} from 'react-router-dom'
 
 var style = {
     backgroundColor: "#F8F8F8",
@@ -14,6 +15,10 @@ var style = {
 const MainMenu = () => {
     return (
         <div style={style}>
+            <button type="button" class="btn btn-link" Link><Link to='/'>Users</Link></button>
+            <button type="button" class="btn btn-link"><Link to='/projects'>Projects</Link></button>
+            <button type="button" class="btn btn-link"><Link to='/todo'>ToDo</Link></button>
+
             <button type="button" class="btn btn-primary">Primary</button>
             <button type="button" class="btn btn-secondary">Secondary</button>
             <button type="button" class="btn btn-success">Success</button>
