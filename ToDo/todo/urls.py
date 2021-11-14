@@ -33,5 +33,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('test_views/', include('test_views.urls', namespace='test_views'), name='test_views'),
-    path('api-token-auth/', obtain_auth_token)
+    path('api-token-auth/', obtain_auth_token),
+    path('jwt/', include('users.urls', namespace='authentication')),  # для JWT
 ]
