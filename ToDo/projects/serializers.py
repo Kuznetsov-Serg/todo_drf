@@ -3,7 +3,7 @@ from users.serializers import UserModelSerializer
 from .models import Project, Todo
 
 
-class ProjectModelSerializer(HyperlinkedModelSerializer):
+class ProjectModelSerializer(ModelSerializer):
     # users = StringRelatedField(many=True)       # не даст редактировать список, но показывает прикольно
     # users = UserModelSerializer(many=True)      # Та-же ерунда
     class Meta:
@@ -13,7 +13,7 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
 
 
 class TodoModelSerializer(ModelSerializer):
-    user = UserModelSerializer()
+    # user = UserModelSerializer()
     class Meta:
         model = Todo
         fields = '__all__'
