@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, viewsets, permissions
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, AdminRenderer, StaticHTMLRenderer, \
     TemplateHTMLRenderer
 
@@ -13,6 +13,7 @@ class UserModelViewSet(ModelViewSet):
     # renderer_classes = [AdminRenderer]    # Выглядит прикольно, но перестает работать React на фронте (рендерит ерунду)
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 #*********************************************************
