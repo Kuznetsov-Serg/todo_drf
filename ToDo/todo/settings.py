@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
     'django_filters',
 
     'users',
@@ -147,6 +148,15 @@ REST_FRAMEWORK = {
         # Any other renders
         'rest_framework.renderers.JSONRenderer',
     ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_PARSER_CLASSES': [
         # If you use MultiPartFormParser or FormParser, we also have a camel case version
         'djangorestframework_camel_case.parser.CamelCaseFormParser',
@@ -158,7 +168,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
 }
-
+# from rest_framework.permissions import IsAuthenticated
 # в режиме отладки добавим интерфейс удобного API-редактирования
 if DEBUG:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].append('rest_framework.renderers.BrowsableAPIRenderer')

@@ -18,7 +18,13 @@ const MainMenu = () => {
             <button type="button" class="btn btn-link" Link><Link to='/'>Users</Link></button>
             <button type="button" class="btn btn-link"><Link to='/projects'>Projects</Link></button>
             <button type="button" class="btn btn-link"><Link to='/todo'>ToDo</Link></button>
+        </div>
+    );
+};
 
+export default MainMenu;
+
+/*
             <button type="button" class="btn btn-primary">Primary</button>
             <button type="button" class="btn btn-secondary">Secondary</button>
             <button type="button" class="btn btn-success">Success</button>
@@ -29,8 +35,4 @@ const MainMenu = () => {
             <button type="button" class="btn btn-dark">Dark</button>
 
             <button type="button" class="btn btn-link">Link</button>
-        </div>
-    );
-};
-
-export default MainMenu;
+*/
