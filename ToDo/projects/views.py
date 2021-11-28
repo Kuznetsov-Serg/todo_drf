@@ -7,7 +7,7 @@ from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, AdminRe
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import ProjectFilter, TodoFilter
-from .serializers import ProjectModelSerializer, ProjectModelSerializerExt, TodoModelSerializer
+from .serializers import ProjectModelSerializer, ProjectModelSerializerExt, TodoModelSerializer, TodoModelSerializerV2
 from .models import Project, Todo
 
 #*********************************************************
@@ -39,6 +39,11 @@ class TodoModelViewSet(ModelViewSet):
     pagination_class = TodoLimitOffsetPagination
     # filterset_fields = ['project']
     filterset_class = TodoFilter
+
+    def get_serializer_class(self):
+        if hasattr(self.request, 'version') and self.request.version == 'v2':   # если версия передана и =='v2'
+            return TodoModelSerializerV2
+        return TodoModelSerializer
 
     def perform_create(self, serializer):
         serializer.save(is_active=True)         # при создании ставим активность заметки, не смотря на поле

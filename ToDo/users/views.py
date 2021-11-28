@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from rest_framework import mixins, viewsets, permissions
+from rest_framework import mixins, viewsets, permissions, generics
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, AdminRenderer, StaticHTMLRenderer, \
     TemplateHTMLRenderer
 
 from rest_framework.viewsets import ModelViewSet
-from .serializers import UserModelSerializer
+from .serializers import UserModelSerializer, UserExtModelSerializer
 from .models import User
 
 
@@ -12,8 +12,13 @@ class UserModelViewSet(ModelViewSet):
     # renderer_classes = [JSONRenderer, BrowsableAPIRenderer]     # Более детальная настройка представления
     # renderer_classes = [AdminRenderer]    # Выглядит прикольно, но перестает работать React на фронте (рендерит ерунду)
     queryset = User.objects.all()
-    serializer_class = UserModelSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    # serializer_class = UserModelSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_serializer_class(self):
+        if hasattr(self.request, 'version') and self.request.version == 'v2':   # если версия передана и =='v2'
+            return UserExtModelSerializer
+        return UserModelSerializer
 
 
 #*********************************************************
@@ -37,3 +42,12 @@ class UserCustomViewSet(mixins.ListModelMixin,
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
 
+
+class UserListAPIView(generics.ListAPIView):
+    queryset = User.objects.all()
+    # serializer_class = UserModelSerializer
+
+    def get_serializer_class(self):
+        if hasattr(self.request, 'version') and self.request.version == 'v2':   # если версия передана и =='v2'
+            return UserExtModelSerializer
+        return UserModelSerializer

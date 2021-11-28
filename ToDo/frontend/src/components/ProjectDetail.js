@@ -42,7 +42,7 @@ const ProjectDetail = ({projects, users, todo}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filtered_todo.map((todo)=> <TodoItem todo={todo}/>)}
+                    {filtered_todo.map((todo)=> <TodoItem todo={todo} users={users}/>)}
                 </tbody>
             </table>
             <h1>Пользователи:</h1>
