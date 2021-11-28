@@ -7,7 +7,7 @@ from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, AdminRe
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import ProjectFilter, TodoFilter
-from .serializers import ProjectModelSerializer, TodoModelSerializer
+from .serializers import ProjectModelSerializer, ProjectModelSerializerExt, TodoModelSerializer
 from .models import Project, Todo
 
 #*********************************************************
@@ -23,9 +23,14 @@ class TodoLimitOffsetPagination(LimitOffsetPagination):
 
 class ProjectModelViewSet(ModelViewSet):
     queryset = Project.objects.all()
-    serializer_class = ProjectModelSerializer
+    # serializer_class = ProjectModelSerializer
     pagination_class = ProjectLimitOffsetPagination
     filterset_class = ProjectFilter         # Filtering через библиотеку django-filter
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:      # Для GET-запросов будем брать др. серилизатор
+            return ProjectModelSerializerExt
+        return ProjectModelSerializer
 
 
 class TodoModelViewSet(ModelViewSet):

@@ -4,13 +4,19 @@ from .models import Project, Todo
 
 
 class ProjectModelSerializer(ModelSerializer):
-    # users = StringRelatedField(many=True)       # не даст редактировать список, но показывает прикольно
-    # users = UserModelSerializer(many=True)      # Та-же ерунда
     class Meta:
         model = Project
         fields = '__all__'
         # exclude = ('users',)
 
+# Дополнительный серелизатор - будем его вызывать только для GET-запросов (views)
+class ProjectModelSerializerExt(ModelSerializer):
+    users = StringRelatedField(many=True)       # не даст редактировать список, но показывает прикольно
+    # users = UserModelSerializer(many=True)      # Та-же ерунда
+    class Meta:
+        model = Project
+        fields = '__all__'
+        # exclude = ('users',)
 
 class TodoModelSerializer(ModelSerializer):
     # user = UserModelSerializer()
