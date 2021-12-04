@@ -14,7 +14,7 @@ from .models import Project, Todo
 # Pagination
 #*********************************************************
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 10
+    default_limit = 20
 
 
 class TodoLimitOffsetPagination(LimitOffsetPagination):
