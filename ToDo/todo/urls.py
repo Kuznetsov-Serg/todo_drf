@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter, SimpleRouter
@@ -66,4 +68,8 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger')),           # Swagger
     path('swagger<str:format>/', schema_view.without_ui()),     # вызов в формате, к примеру (/swagger.json)
     path('redoc/', schema_view.with_ui('redoc')),               # аналог Swagger
+
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path("graphql_no_graph/", csrf_exempt(GraphQLView.as_view(graphiql=False))),
+
 ]
