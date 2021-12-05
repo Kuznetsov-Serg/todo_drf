@@ -66,7 +66,8 @@ class App extends React.Component {
 
     get_headers() {
         let headers = {
-            'Content-Type': 'application/json'
+            'Accept':'application/json; version=v2',     // для поддержки версионности API через AcceptHeaderVersioning
+            'Content-Type':'application/json'
         }
         if (this.is_authenticated()){
                 headers['Authorization'] = 'Token ' + this.state.token
@@ -135,7 +136,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path='/' component={() => <UserList users={this.state.users} />} />
                         <Route exact path='/projects' component={() => <ProjectList projects={this.state.projects} users={this.state.users} />} />
-                        <Route exact path='/todo' component={() => <TodoList todo={this.state.todo} />} />
+                        <Route exact path='/todo' component={() => <TodoList todo={this.state.todo} users={this.state.users} />} />
                         <Route exact path='/project/:id'>
                             <ProjectDetail projects={this.state.projects} users={this.state.users} todo={this.state.todo} />
                         </Route>

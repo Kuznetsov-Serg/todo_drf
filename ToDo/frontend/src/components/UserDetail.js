@@ -56,7 +56,7 @@ const UserDetail = ({all_obj}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filtered_todo.map((todo)=> <TodoItem todo={todo}/>)}
+                    {filtered_todo.map((todo)=> <TodoItem todo={todo} users={all_obj.users}/>)}
                 </tbody>
             </table>
         </div>

@@ -1,6 +1,6 @@
 import TodoItem from './TodoItem.js'
 
-const TodoList = ({todo}) => {
+const TodoList = ({todo, users}) => {
     return (
         <table>
             <thead>
@@ -12,7 +12,7 @@ const TodoList = ({todo}) => {
                 </tr>
             </thead>
             <tbody>
-                {todo.map((todo)=> <TodoItem todo={todo}/>)}
+                {todo.map((todo)=> <TodoItem todo={todo} users={users} />)}
             </tbody>
         </table>
     )

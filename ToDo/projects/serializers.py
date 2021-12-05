@@ -11,7 +11,7 @@ class ProjectModelSerializer(ModelSerializer):
 
 # Дополнительный серелизатор - будем его вызывать только для GET-запросов (views)
 class ProjectModelSerializerExt(ModelSerializer):
-    users = StringRelatedField(many=True)       # не даст редактировать список, но показывает прикольно
+    # users = StringRelatedField(many=True)       # не даст редактировать список, но показывает прикольно
     # users = UserModelSerializer(many=True)      # Та-же ерунда
     class Meta:
         model = Project
@@ -24,3 +24,9 @@ class TodoModelSerializer(ModelSerializer):
         model = Todo
         fields = '__all__'
         # read_only_fields = ('is_active',)
+
+
+class TodoModelSerializerV2(ModelSerializer):
+    class Meta:
+        model = Todo
+        exclude = ('created', 'updated', )
