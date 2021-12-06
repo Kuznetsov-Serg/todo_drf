@@ -39,6 +39,7 @@ const ProjectDetail = ({projects, users, todo}) => {
                         <th>пользователь-создатель</th>
                         <th>заголовок</th>
                         <th>заметка</th>
+                        <th>Активность</th>
                     </tr>
                 </thead>
                 <tbody>

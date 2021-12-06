@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 from graphene_django.views import GraphQLView
 from rest_framework import permissions
 from rest_framework.authtoken.views import obtain_auth_token
@@ -71,5 +72,5 @@ urlpatterns = [
 
     path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
     path("graphql_no_graph/", csrf_exempt(GraphQLView.as_view(graphiql=False))),
-
+    path('', TemplateView.as_view(template_name='index.html')),
 ]
